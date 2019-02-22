@@ -22,8 +22,7 @@ module.exports = (env, argv) => {
   return {
     context: SRC_DIR,
     entry: {
-      initsetup: "./initsetup.jsx",
-      setup: "./setup.jsx"
+      index: "./index.jsx"
     },
     output: {
       path: DIST_DIR,
@@ -116,7 +115,7 @@ module.exports = (env, argv) => {
           loader: "url-loader",
           options: {
             limit: 10 * 1024,
-            name: "resources/images/[name].[ext]"
+            name: "resources/img/[name].[ext]"
           }
         },
         {
@@ -145,14 +144,9 @@ module.exports = (env, argv) => {
     plugins: [
       new CleanWebpackPlugin([DIST_DIR]),
       new HtmlWebpackPlugin({
-        template: "./initsetup.html",
-        filename: "./initsetup.html",
-        chunks: ["initsetup"]
-      }),
-      new HtmlWebpackPlugin({
-        template: "./setup.html",
-        filename: "./setup.html",
-        chunks: ["setup"]
+        template: "./index.html",
+        filename: "./index.html",
+        chunks: ["index"]
       }),
       new MiniCssExtractPlugin({
         filename: ifProd("[name].[hash].css", "[name].css")
@@ -171,10 +165,6 @@ module.exports = (env, argv) => {
       new HotModuleReplacementPlugin()
     ],
     optimization: {
-      splitChunks: {
-        chunks: "all",
-        name: "common"
-      },
       minimizer: [
         new TerserPlugin({
           cache: true,
