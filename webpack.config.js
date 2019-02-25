@@ -82,7 +82,7 @@ module.exports = (env, argv) => {
                 outputStyle: "expanded",
                 sourceMap: true,
                 paths: [
-                  resolve(SRC_DIR, "common", "styles")
+                  resolve(SRC_DIR, "styles")
                 ]
               }
             }
@@ -165,6 +165,10 @@ module.exports = (env, argv) => {
       new HotModuleReplacementPlugin()
     ],
     optimization: {
+      splitChunks: {
+        chunks: "all",
+        name: "common"
+      },
       minimizer: [
         new TerserPlugin({
           cache: true,
