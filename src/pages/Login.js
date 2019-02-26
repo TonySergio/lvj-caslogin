@@ -34,11 +34,11 @@ export default class Login extends React.Component {
 
             <Paper className={styles.paper}>
               <form className={styles.form}>
-                <FormControl required>
+                <FormControl required margin="normal" fullWidth>
                   <InputLabel htmlFor="login">Login</InputLabel>
                   <Input id="login" name="login" autoComplete="email" autoFocus />
                 </FormControl>
-                <FormControl required>
+                <FormControl required margin="normal" fullWidth>
                   <InputLabel htmlFor="password">Password</InputLabel>
                   <Input id="password" name="password" type="password" autoComplete="current-password" />
                 </FormControl>
