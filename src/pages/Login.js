@@ -13,10 +13,57 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-const styles = require('./Login.less');
+import withStyles from '@material-ui/core/styles/withStyles';
 
-export default class Login extends React.Component {
+const stylesLess = require('./Login.less');
+const styles = theme => ({
+  main: {
+    width: 'auto',
+    display: 'block',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit *3 * 2 )]: {
+      width: 400,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    },
+    // backgroundImage: '-webkit-radial-gradient(100% 100%,ellipse farthest-side,#dbf6c8 20%,#1cafc6 50%,#012690 110%)',
+    // backgroundImage: 'radial-gradient(ellipse farthest-side at 100% 100%,#dbf6c8 20%,#1cafc6 50%,#012690 110%)'
+  },
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing.unit * 2,
+
+    marginTop: theme.spacing.unit * 4,
+    marginBottom: theme.spacing.unit * 3,
+
+    [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+      marginTop: theme.spacing.unit * 6,
+      marginBottom: theme.spacing.unit * 6,
+      padding: theme.spacing.unit * 3,
+    }
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 2
+  },
+  submit: {
+    marginTop: theme.spacing.unit * 3
+  },
+
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.secondary.main
+  }
+
+});
+
+class Login extends React.Component {
 	state = {
 		login: '',
 		password: ''
@@ -27,41 +74,47 @@ export default class Login extends React.Component {
 		const { login } = this.state;
 
 		return (
-			<div className={classes.root}>
+			<React.Fragment>
 				 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 	        	<CssBaseline />
-	        	<Header title="JVL CAS"/>
-
-            <Paper className={styles.paper}>
-              <form className={styles.form}>
-                <FormControl required margin="normal" fullWidth>
-                  <InputLabel htmlFor="login">Login</InputLabel>
-                  <Input id="login" name="login" autoComplete="email" autoFocus />
-                </FormControl>
-                <FormControl required margin="normal" fullWidth>
-                  <InputLabel htmlFor="password">Password</InputLabel>
-                  <Input id="password" name="password" type="password" autoComplete="current-password" />
-                </FormControl>
-                <FormControl>
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                </FormControl>
-
-                <Button type="submit"
-                        fullwidth
-                        variant="contained"
-                        color="primary"
-                >
-                  Sign in
-                </Button>
+	        	<Header title="CAS"/>
+            <main className={classes.main}>
+              <Paper className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                  <LockOutlinedIcon/>
+                </Avatar>
+                <form className={classes.form}>
+                  <FormControl margin="normal" required fullWidth>
+                    <InputLabel htmlFor="login">Login</InputLabel>
+                    <Input id="login" name="login" autoComplete="login" autoFocus />
+                  </FormControl>
+                  <FormControl margin="normal" required  fullWidth>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Input id="password" name="password" type="password" autoComplete="current-password" />
+                  </FormControl>
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
 
 
-              </form>
-            </Paper>
+                  <Button type="submit"
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                          className={classes.submit}
+                  >
+                    Sign in
+                  </Button>
+
+
+                </form>
+              </Paper>
+            </main>
 
 
 	        	<Footer />
-			</div>
+      </React.Fragment>
 		);
 	}
 
@@ -71,3 +124,5 @@ export default class Login extends React.Component {
 
 	}
 }
+
+export default withStyles(styles)(Login)

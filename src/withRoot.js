@@ -1,5 +1,6 @@
 import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import "material-icons/iconfont/material-icons.css";
 
 
 // A theme with custom primary and secondary color.
